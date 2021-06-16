@@ -20,11 +20,17 @@ class TwilioVideoLocalView extends Component {
      * How the video stream should be scaled to fit its
      * container.
      */
-    scaleType: PropTypes.oneOf(['fit', 'fill'])
+    scaleType: PropTypes.oneOf(['fit', 'fill']),
+    /**
+     * Indicate if the video should be mirrored
+     */
+    mirror: PropTypes.bool,
   }
 
   render () {
     const scalesType = this.props.scaleType === 'fit' ? 1 : 2
+    const mirror = typeof this.props.mirror === 'boolean' ? this.props.mirror : false
+
     return (
       <RCTTWLocalVideoView scalesType={scalesType} {...this.props}>
         {this.props.children}

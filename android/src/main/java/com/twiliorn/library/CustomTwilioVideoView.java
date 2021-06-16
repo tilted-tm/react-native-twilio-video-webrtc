@@ -596,11 +596,17 @@ public class CustomTwilioVideoView extends View implements LifecycleEventListene
     }
 
     // ===== BUTTON LISTENERS ======================================================================
-    private static void setThumbnailMirror() {
+    @ReactProp(name = "mirror")
+    private static void setThumbnailMirror(@Nullable boolean mirror) {
         if (cameraCapturer != null) {
-            final boolean isBackCamera = isCurrentCameraSourceBackFacing();
             if (thumbnailVideoView != null && thumbnailVideoView.getVisibility() == View.VISIBLE) {
-                thumbnailVideoView.setMirror(!isBackCamera);
+                if (mirror != null) {
+                    thumbnailVideoView.setMirror(mirror);
+                } else {
+                    final boolean isBackCamera = isCurrentCameraSourceBackFacing();
+
+                    thumbnailVideoView.setMirror(!isBackCamera);
+                }
             }
         }
     }

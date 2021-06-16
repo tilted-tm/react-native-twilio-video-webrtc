@@ -79,6 +79,8 @@ TVIVideoFormat *RCTTWVideoModuleCameraSourceSelectVideoFormatBySize(AVCaptureDev
 
 RCT_EXPORT_MODULE();
 
+RCT_CUSTOM_VIEW_PROPERTY(mirror, BOOL)
+
 - (void)dealloc {
   [self clearCameraInstance];
 }
@@ -124,7 +126,7 @@ RCT_EXPORT_MODULE();
 
 - (void)updateLocalViewMirroring:(TVIVideoView *)view {
   if (self.camera && self.camera.device.position == AVCaptureDevicePositionFront) {
-    view.mirror = true;
+    view.mirror = mirror;
   }
 }
 
@@ -417,7 +419,7 @@ RCT_EXPORT_METHOD(connect:(NSString *)accessToken roomName:(NSString *)roomName 
     if (self.localDataTrack) {
       builder.dataTracks = @[self.localDataTrack];
     }
-      
+
     builder.dominantSpeakerEnabled = dominantSpeakerEnabled ? YES : NO;
 
     builder.roomName = roomName;
