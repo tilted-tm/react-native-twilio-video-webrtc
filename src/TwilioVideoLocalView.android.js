@@ -15,11 +15,7 @@ const propTypes = {
    * How the video stream should be scaled to fit its
    * container.
    */
-  scaleType: PropTypes.oneOf(['fit', 'fill']),
-  /**
-   * Indicate if the video should be mirrored
-   */
-  mirror: PropTypes.bool,
+  scaleType: PropTypes.oneOf(['fit', 'fill'])
 }
 
 class TwilioVideoPreview extends React.Component {
