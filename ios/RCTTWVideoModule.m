@@ -124,7 +124,7 @@ RCT_EXPORT_MODULE();
 
 - (void)updateLocalViewMirroring:(TVIVideoView *)view {
   if (self.camera && self.camera.device.position == AVCaptureDevicePositionFront) {
-    view.mirror = true;
+    view.mirror = false; // @XXX: Was true before
   }
 }
 
@@ -272,7 +272,7 @@ RCT_EXPORT_METHOD(flipCamera) {
     if (self.camera) {
         AVCaptureDevicePosition position = self.camera.device.position;
         AVCaptureDevicePosition nextPosition = position == AVCaptureDevicePositionFront ? AVCaptureDevicePositionBack : AVCaptureDevicePositionFront;
-        BOOL mirror = nextPosition == AVCaptureDevicePositionFront;
+        BOOL mirror = false; // @XXX: Old code: nextPosition == AVCaptureDevicePositionFront;
 
         AVCaptureDevice *captureDevice = [TVICameraSource captureDeviceForPosition:nextPosition];
         [self.camera selectCaptureDevice:captureDevice completion:^(AVCaptureDevice *device,
@@ -417,7 +417,7 @@ RCT_EXPORT_METHOD(connect:(NSString *)accessToken roomName:(NSString *)roomName 
     if (self.localDataTrack) {
       builder.dataTracks = @[self.localDataTrack];
     }
-      
+
     builder.dominantSpeakerEnabled = dominantSpeakerEnabled ? YES : NO;
 
     builder.roomName = roomName;
