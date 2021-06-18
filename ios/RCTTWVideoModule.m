@@ -123,8 +123,8 @@ RCT_EXPORT_MODULE();
 }
 
 - (void)updateLocalViewMirroring:(TVIVideoView *)view {
-  if (self.camera && self.camera.device.position == AVCaptureDevicePositionFront) {
-    view.mirror = false; // @XXX: Was true before
+  if (view) {
+    view.mirror = true;
   }
 }
 
